@@ -1,5 +1,5 @@
 
-Prefix = '2FA!' #Prefix der aber komplet egal ist und nur für den syntax hier ist XD
+Prefix = '2FA!' #Prefix der aber komplet egal ist und nur für den syntax hier ist
 
 #Imports
 #import save as s
