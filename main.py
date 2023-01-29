@@ -1,8 +1,8 @@
-
+#Discord Bot Der Eine 2FA Per QR code und app ermöglicht
 Prefix = '2FA!' #Prefix der aber komplet egal ist und nur für den syntax hier ist
 
 #Imports
-#import save as s
+import save as s #Nicht Die Hochgeladene Version Sondern V1 
 import pyqrcode
 import discord
 from discord.ext import commands
