@@ -1,8 +1,3 @@
-#info
-#https://discord.com/api/oauth2/authorize?client_id=963812161841410058&permissions=1505922116823&scope=applications.commands%20bot
-#Aktuel Deaktivirt
-
-#Settings
 
 Prefix = '2FA!' #Prefix der aber komplet egal ist und nur für den syntax hier ist XD
 
@@ -29,55 +24,15 @@ bot.remove_command('help')
 @bot.event
 async def on_ready():
     print('Bot Ist Online')
-    bot.loop.create_task(status())
-async def status():
-    while True:
-        await bot.change_presence(status=discord.Status.online,activity=discord.Game('2FA Verify'))
-        await asyncio.sleep(5)
-        await bot.change_presence(status=discord.Status.online, activity=discord.Game(f'{len(set(bot.users))} Members'))
-        await asyncio.sleep(5)
-        await bot.change_presence(status=discord.Status.online,activity=discord.Game(f'/Fa'))
-        await asyncio.sleep(5)
-        await bot.change_presence(status=discord.Status.online,activity=discord.Game(f'{len(bot.guilds)} Servers'))
-        await asyncio.sleep(5)
+
 @bot.command
 async def Test(ctx):
     print('test')
-@slash.slash(name='Userinfo',description='get infos to a spicific user')
-async def Userinfo(ctx,member:discord.Member):
-    embed = discord.Embed(title=f'Userinfo to the user {member.display_name}')
-    embed.add_field(name='Name:',value= f'{member.mention}',inline=True)
-    embed.add_field(name='Status:',value= f'{member.status}',inline=True)
-    embed.add_field(name='Server joint:',value=f'{member.joined_at}',inline=True)
-    embed.add_field(name='Acc created:',value=f'{member.created_at}',inline=True)
-    rollen = ''
-    for role in member.roles:
-        if not role.is_default():
-            rollen += f'{role.mention} \r\n'
-    if rollen:
-        embed.add_field(name='Rollen', value=rollen, inline=True)
-    embed.set_thumbnail(url=member.avatar_url)
-    await ctx.send(embed=embed)
 @slash.slash(name='ping',description='get the ping of the bot')
 async def ping(ctx):
     embed = discord.Embed(title=f'@{ctx.author} ping: {round(bot.latency * 1000)}ms')
     await ctx.send(embed=embed)
-@slash.slash(name='info',description='get infos to the bot')
-async def info(ctx):
-    embed = discord.Embed(name='Infos zum Bot:',description=f'The Bot von {bot.get_user(541971047776256021).mention} was createt at 13.04.2022 for a server thats have been deletet and so it became a 2FA Bot. invite the bot via https://discord.com/api/oauth2/authorize?client_id=963812161841410058&permissions=1505922116823&scope=applications.commands%20bot  Warning: This bot dont be 24/7 on yet because i dont have a server')
-    await ctx.send(embed=embed)
-#@slash.slash(name='Support',description='help the bot to stay online for free')
-#async  def Support(ctx):
-    #await ctx.send('help the bot to stay online for free: login at https://bot-hosting.net?aff=541971047776256021 thats make the bot last 1 weak longer')
-@slash.slash(name='help',description='Get you help')
-async def help(ctx):
-    embed=discord.Embed(title='Help Menu',description='')
-    embed.add_field(name='ping',value='get you the ping of the bot',inline=True)
-    embed.add_field(name='userinfo',value='get infos to a spicific user',inline=True)
-    embed.add_field(name='info',value='get the bot info')
-    embed.add_field(name='fa', value='verify you whith you smartphone via auth app like google authenticator')
-    #embed.add_field(name='Support', value='help the bot to stay online for free')
-    await ctx.send(embed=embed)
+
 @slash.slash(name='Fa',description='Test für die 2FA')
 async def Fa(ctx,code=None):
     id = ctx.author.id
@@ -130,4 +85,4 @@ async def set_role(ctx,role: discord.Role):
     guild_id = ctx.guild.id
     s.save([str(guild_id),str(role.id)])
     await ctx.send(f'Verify role set to {role}')
-bot.run(get_config("Token"))
+bot.run(get_config("Token"))#Token Ist das einzige in der config deswegen hier nicht drinnen da das Token Sowiso nicht gezeigt werden sollte
